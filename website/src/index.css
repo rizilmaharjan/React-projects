@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap");
+
+* {
+  font-family: "Comfortaa", cursive;
+}
+
+.navbar {
+  background-color: #fff;
+}
+.navbar-brand {
+  font-size: 1.9rem;
+  color: #565387;
+}
+.navbar a {
+  font-size: 1.3rem;
+  text-transform: capitalize;
+}
+
+#header{
+  width: 100%;
+  height: 80vh;
+  margin-top: 70px;
+}
+
+#header h1{
+  margin: 0 0 10px o;
+  font-size: 48px;
+  font-weight: 700;
+  color: black;
+}
+
+#header .brand-name{
+  color: #3498db;
+}
+
+#header h2{
+  color: #484848 ;
+  font-size: 24px;
+}
+.header-img{
+  text-align: right;
+}
+.header .animated{
+  animation: movingImage 2s ease-in-out infinite alternate-reverse both;
+}
+
+@-webkit-keyframes movingImage{
+  0%{
+    transform: translateY(10px);
+  }
+  100%{
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes movingImage{
+  0%{
+    transform: translateY(10px);
+  }
+  100%{
+    transform: translateY(-10px);
+  }
+
+}
+
+ul li .nav-link{
+  text-transform: capitalize;
+  margin: 0px 6px;
+  position: relative;
+}
+ul li .nav-link::before{
+  content: "";
+   width: 15px; 
+   height: 14px; 
+   position: absolute; 
+  left: 4px;
+  bottom: 12px;
+  border: 4px solid rgba(211,12,111,1);
+  border-width: 0px 0px 2px 2px;
+  opacity: 0;
+
+}
+ul li .nav-link::after{
+  content: "";
+  width: 15px;
+  height: 14px;
+  position: absolute;
+  right: 4px;
+  top: 12px;
+  border: 4px solid rgba(211,12,111,1);
+  border-width: 2px 2px 0px 0px;
+  opacity: 0;
+
+}
+
+ul li .nav-link:hover::before{
+  left: -5px;
+  bottom: -4px;
+  transition: 0.3s all;
+  opacity: 1;
+}
+ul li .nav-link:hover::after{
+  right: -5px;
+  top: -4px;
+  transition: 0.3s all;
+  opacity: 1;
+  
+}
+
+ul li .nav-link:hover{
+  background-color: rgba(211,12,111,1);
+  color: #fff;
+
+}
+
+
+
+.navbar a:hover {
+  color: #3498db;
+}
+@media (max-width: 991px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  .footers p{
+    font-size: 12px;
+    margin-top: -30px;
+
+  }
+  #home h1,#home h2{
+    font-size: 20px;
+  } 
+}
+
+@media (min-width: 1024px){
+  #home h1,#home h2{
+    font-size: 32px;
+  } 
+
+}
+
+@media (min-width: 1297px){
+  #home h1,#home h2{
+    font-size: 35px;
+  } 
+
+
+}
+@media (min-width: 1415px){
+  #home h1,#home h2{
+    font-size: 45px;
+  } 
+
+
+}

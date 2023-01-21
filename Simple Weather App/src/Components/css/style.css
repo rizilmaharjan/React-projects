@@ -1,0 +1,206 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Jost:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Jost:wght@300&family=Open+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Jost:wght@300&family=Open+Sans:wght@300&family=Playfair+Display+SC&display=swap');
+
+*{
+    font-family: 'Jost', sans-serif;
+}
+
+body{
+    background: #f3f2ef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    height: 100vh;
+    width: 100vw;
+}
+
+html, body{
+    font-size: 62.5%;
+    height: 100%;
+}
+html{
+    background: #eee;
+}
+
+
+ .box{
+        width: 19vw;
+        height: 60vh;
+        border-radius: 0.5rem;
+        box-shadow: 0 0.2rem 3rem rgba(0, 0, 0, 0.2);
+        background: #a5bbdd;
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0, 0, 0);
+        min-width: 20rem;
+        min-height: 35rem;
+
+    }
+
+.wave{
+    opacity: 0.3;
+    position: absolute;
+    top: 120%;
+    left: 50%;
+    background-color: white;
+    width: 50rem;
+    height: 50rem;
+    margin-left: -25rem;
+    margin-top: -20rem;
+    transform-origin: 50% 48%;
+    border-radius: 43%;
+    animation: drift 3000ms infinite linear;
+    z-index: 1;
+}
+
+.wave.-three{
+    animation: drift 5000ms infinite linear;
+    z-index: 2 !important;
+    opacity: 0.2;
+}
+
+.wave.-two{
+    animation: drift 7000ms infinite linear;
+    opacity: 0.1;
+    z-index: 3 !important;
+}
+
+.box:after{
+    content: "";
+    display: block;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 11;
+    transform: translate3d(0, 0, 0);
+}
+
+@keyframes drift{
+    from{
+        transform: rotate(0deg);
+    }
+    from{
+        transform: rotate(360deg);
+    }
+}
+.info{
+    position: absolute;
+    top: 170px;
+    width: 100%;
+    height: 45%;
+    z-index: 4;
+    
+
+
+
+}
+.location{
+    margin-top: 1.5rem;
+    text-align: center;
+    font-weight: 800;
+    font-size: 3rem;
+    font-weight: 400;
+    font-family: 'Playfair Display SC', serif;
+
+}
+
+.fa-street-view{
+    animation: rotates 3s linear infinite alternate;
+}
+
+@keyframes rotates{
+    from{
+        transform: translateX(-0.5rem);
+    }
+    to{
+        transform: translateX(0.5rem);
+    }
+}
+
+.temp{
+    margin-top: 2.5rem;
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Playfair Display SC', serif;
+}
+
+.tempmin_max{
+    text-align: center;
+    margin-top: 0.3rem;
+    font-weight: 300;
+    font-size: 1.4rem;
+    color: #57606f;
+    font-family: 'Playfair Display SC', serif;
+
+}
+#searchCity{
+    padding: 10px 20px;
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 25px;
+    color: #dfe4ea;
+    font-weight: bolder;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+.noCity{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0px;
+    margin-top: 50px;
+
+}
+ .emo{
+    font-size: 30px;
+    margin: auto;
+}
+.err, .para{
+    font-size: 16px;
+    margin: auto;
+    padding: 14px 0px;
+}
+.err{
+    
+    color: #050C33;
+    font-size: 22px;
+    font-weight: bolder;
+}
+.para{
+    color: grey;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#con{
+    display: flex;
+    margin-top: 20px;
+  
+}
+#con i{
+    font-size: 5.7rem;
+    margin: auto;
+    animation: fas-anime 3s linear infinite alternate;
+}
+
+@keyframes fas-anime{
+    from{
+        transform: scale(0.8);
+    }
+    to{
+        transform: scale(1.2);
+    }
+}
+.weather_description p{
+    font-size:18px ;
+    text-align: center;
+    margin-top:12px ;
+    font-weight: bold;
+}

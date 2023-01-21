@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  font-family: 'Comfortaa', cursive;
+  box-sizing: border-box;
+}
+
+.header{
+  
+  background-color: #f2b402;
+  display: flex;
+  padding: 20px 0px;
+  color: white;
+  
+}
+
+.main_note{
+ 
+  margin-top: 20px;
+  
+  box-shadow: 0px 0px 12px rgba(0,0,0,0.8);
+  height: 23vh;
+  width: 68vh; 
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+form{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+textarea{
+  height: 114px;
+  border: none;
+  outline: none;
+}
+input{
+  padding: 10px 0px;
+  color: black;
+  font-weight: bolder;
+  font-size: 20px;
+  border: none;
+  outline: none;
+}
+
+.note{
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  margin-top: 50px;
+  width: 15%;
+  display: inline-block;
+  margin-left: 50px;
+  padding-bottom: 40px ;
+  position: relative;
+  height: 20vh;
+  overflow-y: auto;
+}
+
+.note h1{
+  font-size: 20px;
+  text-transform: capitalize;
+}
+.note p{
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: bolder;
+}
+.deleteIcon{
+ color: #f2b402;
+ 
+}
+.btn{
+  position: absolute;
+  width: 20%;
+  border-radius: 50%;
+  border: 1px solid white;
+  font-size: 30px;
+  background-color: white;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.6);
+  bottom: 15px;
+  right: 20px;
+}
+#root{
+  height: 100vh;
+  position: relative;
+}
+footer{
+  width: 100vw;
+  text-align: center;
+  position: absolute;
+  bottom: 0px;
+}
+
+
