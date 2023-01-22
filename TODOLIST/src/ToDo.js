@@ -29,7 +29,8 @@ const ToDo = () => {
             items.map((curElem)=>{
                 if(curElem.id === isEditItem){
                     return {
-                        ...curElem, name: inputData
+                        ...curElem, 
+                        name: inputData
                     };
                 }
                 return curElem;
