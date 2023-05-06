@@ -23,28 +23,28 @@ const ToDo = () => {
   const addItem = () => {
     if (!inputData) {
       alert("Please enter your items");
-    } 
+    }
     else if(inputData && toggleButton){
         setItems(
             items.map((curElem)=>{
                 if(curElem.id === isEditItem){
                     return {
-                        ...curElem, 
+                        ...curElem,
                         name: inputData
                     };
                 }
                 return curElem;
-                
+
             })
         )
 
         setInputData("");
         setIsEditItem("edElem");
         setToggleButton(false);
-    
+
 
     }
-    
+
     else {
         const myNewInputData = {
             id: new Date().getTime().toString(),
@@ -54,7 +54,7 @@ const ToDo = () => {
       setInputData("");
     }
 
-    
+
   };
   // To Delete the items
   const delItem = (id)=>{
@@ -82,6 +82,7 @@ const editBtn = (edElem)=>{
         return curElem.id === edElem;
 
     })
+    console.log("🚀 ~ file: ToDo.js:85 ~ constitem_todo_edited=items.find ~ item_todo_edited:", item_todo_edited)
     setInputData(item_todo_edited.name);
     setIsEditItem(edElem);
     setToggleButton(true);
@@ -106,7 +107,7 @@ const editBtn = (edElem)=>{
             {
                 toggleButton ? (<i className="far fa-edit add-btn" onClick={addItem}></i>) : (<i className="fa fa-plus add-btn" onClick={addItem}></i>)
             }
-          
+
           </div>
           {/* Show our items */}
           <div className="showItems">

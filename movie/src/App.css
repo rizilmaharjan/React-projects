@@ -1,0 +1,25 @@
+.movie-section {
+    display: grid;
+    place-items: center;
+
+}
+
+.movie-section .loading {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #1e90ff;
+  border: 12px solid #f3f3f3;
+  border-top: 12px solid #1e90ff;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
