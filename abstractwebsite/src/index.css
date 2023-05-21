@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.herosection{
+    background-color: #dadbf1;
+}
+.gridsection{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
