@@ -5,7 +5,7 @@ import { BsFillMoonStarsFill } from "react-icons/bs";
 const ReduceBMI = () => {
   return (
     <>
-      <div>
+      <div className="px-20">
         <BMIReduceBlock
           img={<RiCake3Line className="h-full w-full" />}
           title="Healthy eating"
