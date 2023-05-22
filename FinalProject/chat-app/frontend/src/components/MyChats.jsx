@@ -1,16 +1,13 @@
-import { Tooltip } from "@chakra-ui/tooltip";
 import { Box, Stack, Text } from "@chakra-ui/layout";
 import { useToast } from "@chakra-ui/toast";
-import ReactHtmlParser from "react-html-parser";
-import { Button } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { ChatState } from "../Context/ChatProvider";
 import { getSender } from "../config/ChatLogics";
 import { BaseAxios } from "../http/baseAxios";
 import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
-
-import groupIcon from "../assets/chat-group.png";
+import { MdGroupAdd } from "react-icons/md";
+import parse from "html-react-parser";
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -40,15 +37,6 @@ const MyChats = ({ fetchAgain }) => {
       });
     }
   };
-  function formatMessage(content) {
-    // Remove unwanted tags and attributes
-    const formattedContent = content.replace(/<(\/)?[a-z]+>|<[^>]+ style="[^"]*">/gi, "");
-  
-    // Remove underline style
-    const contentWithoutUnderline = formattedContent.replace(/<u>|<\/u>/g, "");
-  
-    return contentWithoutUnderline;
-  }
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("userInfo"));
@@ -83,14 +71,8 @@ const MyChats = ({ fetchAgain }) => {
         >
           My Chats
           <GroupChatModal>
-            <Tooltip label='Create Group' hasArrow placement='bottom-end' fontSize="0.70em" borderRadius={15}>
-            
-              
-              {/* New Group Chat */}
-              <img src={groupIcon} h="45px" w="45px" position="absolute" />
-
-           
-            </Tooltip>
+            {/* New Group Chat */}
+            <MdGroupAdd className="cursor-pointer" />
           </GroupChatModal>
         </Box>
         <Box
@@ -122,15 +104,17 @@ const MyChats = ({ fetchAgain }) => {
                       : chat.chatName}
                   </Text>
                   {chat.latestMessage && (
-                   
-                        <Text fontSize="xs">
-
+                    <Text fontSize="xs">
                       <b>{chat.latestMessage.sender.name}: </b>
-                      {chat.latestMessage.content.length > 50
-                        ? chat.latestMessage.content.substring(0, 51) + "..."
-                        : ReactHtmlParser(formatMessage(chat.latestMessage.content))}
+
+                      {chat.latestMessage.content.includes("iframe") ? (
+                        <b>video</b>
+                      ) : chat.latestMessage.content.includes("img src") ? (
+                        <b>photo</b>
+                      ) : (
+                        parse(chat.latestMessage.content)
+                      )}
                     </Text>
-                      
                   )}
                 </Box>
               ))}
