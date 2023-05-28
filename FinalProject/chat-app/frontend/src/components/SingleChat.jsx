@@ -176,8 +176,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         <>
           <Text
             fontSize={{ base: "28px", md: "30px" }}
-            pb={3}
-            px={2}
+            px={3}
+            py={2}
             w="100%"
             fontFamily="Work sans"
             display="flex"
@@ -208,12 +208,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 </>
               ))}
           </Text>
+          <hr className="bg-black border-black w-full my-2" />
           <Box
             display="flex"
             flexDirection="column"
             justifyContent="flex-end"
-            p={3}
-            bg="#E8E8E8"
             w="100%"
             h="100%"
             borderRadius="lg"
@@ -259,7 +258,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
               <div
                 style={{
-                  height: "200px",
+                  height: "230px",
                   width: "100%",
                   marginBottom: "-6.8rem",
                   position: "relative",
@@ -267,12 +266,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               >
                 <div className="z-10 top-3 absolute flex right-6">
                   {speak ? (
-                    <BsFillMicMuteFill
+                    <BsFillMicFill
                       className="mx-2 text-2xl cursor-pointer"
                       onClick={stopListening}
                     />
                   ) : (
-                    <BsFillMicFill
+                    <BsFillMicMuteFill
                       className="mx-2 text-2xl cursor-pointer"
                       onClick={startListening}
                     />
@@ -294,9 +293,34 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     height: 145,
                     menubar: false,
                     plugins:
-                      "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode",
+                      "anchor preview autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode textcolor",
                     toolbar:
-                      "fontfamily fontsize | bold italic underline | link image media mergetags | addcomment showcomments | emoticons",
+                      "fontsize | bold italic underline | link image media mergetags | addcomment showcomments | forecolor export preview",
+                      setup: function (editor) {
+                        editor.ui.registry.addButton("preview", {
+                          text: "Preview",
+                          onAction: function () {
+                            editor.execCommand("mcePreview");
+                          },
+                        });
+                      },
+                      export_filename: "document", // Specify the default filename for the exported document
+                      export_formats: {
+                        pdf: {
+                          text: "Export as PDF", // Display name for the PDF export option
+                          content_style: ".mce-content-body { font-size: 14px; }", // Custom styling for the exported content
+                          file_type: "application/pdf", // File type for PDF
+                          file_extension: ".pdf", // File extension for PDF
+                        },
+                        docx: {
+                          text: "Export as DOCX", // Display name for the DOCX export option
+                          content_style: ".mce-content-body { font-size: 14px; }", // Custom styling for the exported content
+                          file_type:
+                            "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // File type for DOCX
+                          file_extension: ".docx", // File extension for DOCX
+                        },
+                      }
+                   
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && e.shiftKey) {
