@@ -1,6 +1,5 @@
 import { Avatar } from "@chakra-ui/avatar";
 
-import { AiOutlineSearch } from "react-icons/ai";
 import { Button } from "@chakra-ui/button";
 import { useDisclosure } from "@chakra-ui/hooks";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
@@ -133,61 +132,18 @@ function SideDrawer() {
         p="5px 10px 5px 10px"
         borderWidth="5px"
       >
-        <Text fontSize="2xl" as="b" fontFamily="Work sans">
+        
+        <Text fontSize="2xl" fontFamily="Work sans">
           Team Collab
         </Text>
-        {/* <Image src='./appLogo.png' alt='Dan Abramov' /> */}
-        {/* <Tooltip label='Search Users to chat' hasArrow placement='bottom-end'>
-          <Button variant='ghost' onClick={onOpen}>
-            <i className='fas fa-search'></i>
+        <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
+          <Button variant="ghost" onClick={onOpen}>
+            <i className="fas fa-search"></i>
             <Text d={{ base: "none", md: "flex" }} px={4}>
               Search User
             </Text>
           </Button>
-        </Tooltip> */}
-
-        <div style={{display:"flex", flexDirection:"column"}}>
-          <div style={{ position: "relative" }}>
-            <input
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              type="text"
-              style={{
-                border: "1px solid black",
-                boxShadow: "1px 2px 4px rgba(0, 0, 0, 0.2)",
-                color: "#000",
-                width: "100%",
-                padding: "0.3rem 0.8rem",
-                borderRadius: "20px",
-              }}
-            />
-            <AiOutlineSearch
-              onClick={handleSearch}
-              style={{
-                position: "absolute",
-                right: "15px",
-                bottom: "10px",
-                color: "#000",
-              }}
-            />
-          </div>
-
-          <div>
-            {loading ? (
-              <ChatLoading />
-            ) : (
-              searchResult?.map((user) => (
-                <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => accessChat(user._id)}
-                />
-              ))
-            )}
-            {loadingChat && <Spinner ml="auto" display="flex" />}
-          </div>
-        </div>
-
+        </Tooltip>
         <div>
           <Menu>
             <MenuButton p={1}>
@@ -233,22 +189,39 @@ function SideDrawer() {
             </MenuList>
           </Menu>
         </div>
-      </Flex>
+        </Flex>
 
-      {/* <Drawer placement='top' size={"100px"} onClose={onClose} isOpen={isOpen}>
+       
+
+      <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerHeader borderBottomWidth='1px'>Search Users</DrawerHeader>
-          <DrawerBody >
+          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+          <DrawerBody>
             <Box display="flex" pb={2}>
-              <Input placeholder='Search by name or email' mr={2} value={search} onChange={(e) => setSearch(e.target.value)} />
+              <Input
+                placeholder="Search by name or email"
+                mr={2}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
               <Button onClick={handleSearch}>Go</Button>
             </Box>
-            {loading ? <ChatLoading /> : searchResult?.map((user) => <UserListItem key={user._id} user={user} handleFunction={() => accessChat(user._id)} />)}
-            {loadingChat && <Spinner ml='auto' display="flex" />}
+            {loading ? (
+              <ChatLoading />
+            ) : (
+              searchResult?.map((user) => (
+                <UserListItem
+                  key={user._id}
+                  user={user}
+                  handleFunction={() => accessChat(user._id)}
+                />
+              ))
+            )}
+            {loadingChat && <Spinner ml="auto" display="flex" />}
           </DrawerBody>
         </DrawerContent>
-      </Drawer> */}
+      </Drawer>
     </>
   );
 }
