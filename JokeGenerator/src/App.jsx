@@ -1,10 +1,20 @@
-import Joke from "./pages/Joke"
+import Joke from "./pages/Joke";
+import { QueryClient, QueryClientProvider } from "react-query";
+const queryClient = new QueryClient({
+  defaultOptions:{
+    queries:{
+      refetchOnWindowFocus: false
+    }
+  }
+});
 const App = () => {
   return (
     <>
-      <Joke />
+      <QueryClientProvider client={queryClient}>
+        <Joke />
+      </QueryClientProvider>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
