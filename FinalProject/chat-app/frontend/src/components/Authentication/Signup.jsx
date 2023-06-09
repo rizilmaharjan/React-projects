@@ -45,7 +45,8 @@ const Signup = () => {
       setPicLoading(false);
       return;
     }
-    if (!email.includes("@")) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.match(emailRegex)) {
       toast({
         title: "Invalid Email",
         status: "warning",
@@ -94,7 +95,6 @@ const Signup = () => {
 
       return;
     }
-    console.log(name, email, password, pic);
     try {
       const config = {
         headers: {
