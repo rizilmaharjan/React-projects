@@ -16,6 +16,8 @@ import { getSender, getSenderFull } from "../config/ChatLogics";
 import ScrollableChat from "./ScrollableChat";
 import ProfileModal from "./miscellaneous/ProfileModal";
 import parse from "html-react-parser";
+import ReactHtmlParser from "react-html-parser";
+
 import "./styles.css";
 
 import io from "socket.io-client";
@@ -31,7 +33,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
-  const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
   const [speech, setSpeech] = useState(false);
@@ -177,6 +178,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           <Text
             fontSize={{ base: "28px", md: "30px" }}
             px={3}
+            style={{ backgroundColor: "#fff" }}
             py={2}
             w="100%"
             fontFamily="Work sans"
@@ -210,6 +212,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </Text>
           <hr className="bg-black border-black w-full my-2" />
           <Box
+            style={{ backgroundColor: "#fff" }}
             display="flex"
             flexDirection="column"
             justifyContent="flex-end"
@@ -231,7 +234,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <ScrollableChat
                   messages={messages.map((message) => ({
                     ...message,
-                    content: parse(message.content),
+                    content: ReactHtmlParser(message.content),
                   }))}
                 />
               </div>
@@ -276,15 +279,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                       onClick={startListening}
                     />
                   )}
-
-                  <GrPowerReset
-                    className="mx-2 text-2xl cursor-pointer"
-                    onClick={resetTranscript}
-                  />
                 </div>
 
                 <Editor
-                  apiKey="16e44jn217dk47joej9t1ic9p6zj5culehfg9wijnhhqo032"
+                  apiKey="i5jxo89i3isqnperj0p3rz8q0yzlhib64z2s16jq26z2kxkc"
                   onInit={(evt, editor) => (editorRef.current = editor)}
                   onEditorChange={setNewMessage}
                   value={speech ? transcript : newMessage}
@@ -292,35 +290,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     statusbar: "false",
                     height: 145,
                     menubar: false,
+                    selector: "textarea",
                     plugins:
-                      "anchor preview autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode textcolor",
+                      "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount",
                     toolbar:
-                      "fontsize | bold italic underline | link image media mergetags | addcomment showcomments | forecolor export preview",
-                      setup: function (editor) {
-                        editor.ui.registry.addButton("preview", {
-                          text: "Preview",
-                          onAction: function () {
-                            editor.execCommand("mcePreview");
-                          },
-                        });
-                      },
-                      export_filename: "document", // Specify the default filename for the exported document
-                      export_formats: {
-                        pdf: {
-                          text: "Export as PDF", // Display name for the PDF export option
-                          content_style: ".mce-content-body { font-size: 14px; }", // Custom styling for the exported content
-                          file_type: "application/pdf", // File type for PDF
-                          file_extension: ".pdf", // File extension for PDF
-                        },
-                        docx: {
-                          text: "Export as DOCX", // Display name for the DOCX export option
-                          content_style: ".mce-content-body { font-size: 14px; }", // Custom styling for the exported content
-                          file_type:
-                            "application/vnd.openxmlformats-officedocument.wordprocessingml.document", // File type for DOCX
-                          file_extension: ".docx", // File extension for DOCX
-                        },
-                      }
-                   
+                      "undo redo | fontsize | bold italic underline | link image media mergetags | addcomment showcomments | forecolor",
                   }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && e.shiftKey) {
@@ -346,6 +320,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     } else if (e.key === "Enter") {
                       e.preventDefault();
                       sendMessage();
+                      resetTranscript();
                     }
                   }}
                 />
