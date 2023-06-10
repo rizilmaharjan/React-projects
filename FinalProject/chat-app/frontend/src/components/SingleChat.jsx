@@ -1,6 +1,7 @@
 import { FormControl } from "@chakra-ui/form-control";
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Editor } from "@tinymce/tinymce-react";
+
 import { useRef } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -16,14 +17,19 @@ import { getSender, getSenderFull } from "../config/ChatLogics";
 import ScrollableChat from "./ScrollableChat";
 import ProfileModal from "./miscellaneous/ProfileModal";
 import parse from "html-react-parser";
-import ReactHtmlParser from "react-html-parser";
-
+import { Words } from "./words/Words";
 import "./styles.css";
+import { MdRecordVoiceOver, MdVoiceOverOff } from "react-icons/md";
 
 import io from "socket.io-client";
 import { ChatState } from "../Context/ChatProvider";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { BaseAxios } from "../http/baseAxios";
+import {
+  caesarCipher,
+  caesarDecipher,
+  replaceWordsWithAsterisks,
+} from "./encrypt/Encrypt";
 
 const ENDPOINT = "http://localhost:4000";
 var socket, selectedChatCompare;
@@ -33,10 +39,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
+  const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const toast = useToast();
   const [speech, setSpeech] = useState(false);
   const [speak, setSpeak] = useState(false);
+
 
   const startListening = () => {
     SpeechRecognition.startListening({ continuous: true, language: "en-US" });
@@ -70,8 +78,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
-  const { selectedChat, setSelectedChat, user, notification, setNotification } =
+  const { selectedChat, trashTalk, setTrashTalk, setSelectedChat, user, notification, setNotification } =
     ChatState();
+
+  const handleTrashTalk = () => {
+    setTrashTalk(!trashTalk);
+  };
 
   const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -120,11 +132,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         const { data } = await BaseAxios.post(
           "/api/message",
           {
-            content: plainTextContent,
+            content: caesarCipher(plainTextContent, 1234),
             chatId: selectedChat,
           },
           config
         );
+        // data.content = caesarCipher(data.content,1234)
 
         socket.emit("new message", data);
         setMessages([...messages, data]);
@@ -178,7 +191,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           <Text
             fontSize={{ base: "28px", md: "30px" }}
             px={3}
-            style={{ backgroundColor: "#fff" }}
             py={2}
             w="100%"
             fontFamily="Work sans"
@@ -212,7 +224,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </Text>
           <hr className="bg-black border-black w-full my-2" />
           <Box
-            style={{ backgroundColor: "#fff" }}
             display="flex"
             flexDirection="column"
             justifyContent="flex-end"
@@ -232,11 +243,16 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             ) : (
               <div className="messages">
                 <ScrollableChat
-                  messages={messages.map((message) => ({
-                    ...message,
-                    content: ReactHtmlParser(message.content),
-                  }))}
-                />
+  messages={messages.map((message) => ({
+    ...message,
+    content: parse(
+      !trashTalk
+        ? replaceWordsWithAsterisks(caesarDecipher(message.content, 1234), Words)
+        : caesarDecipher(message.content, 1234)
+    ),
+  }))}
+/>
+
               </div>
             )}
 
@@ -277,6 +293,18 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     <BsFillMicMuteFill
                       className="mx-2 text-2xl cursor-pointer"
                       onClick={startListening}
+                    />
+                  )}
+
+                  {!trashTalk ? (
+                    <MdVoiceOverOff
+                      onClick={handleTrashTalk}
+                      className="text-2xl ml-4 cursor-pointer"
+                    />
+                  ) : (
+                    <MdRecordVoiceOver
+                      onClick={handleTrashTalk}
+                      className="text-2xl ml-4 cursor-pointer"
                     />
                   )}
                 </div>
