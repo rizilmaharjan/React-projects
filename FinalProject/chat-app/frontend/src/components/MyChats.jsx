@@ -8,11 +8,13 @@ import ChatLoading from "./ChatLoading";
 import GroupChatModal from "./miscellaneous/GroupChatModal";
 import { MdGroupAdd } from "react-icons/md";
 import parse from "html-react-parser";
+import { caesarDecipher, replaceWordsWithAsterisks } from "./encrypt/Encrypt";
+import { Words } from "./words/Words";
 
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState(null);
 
-  const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
+  const { selectedChat, setSelectedChat, trashTalk, setTrashTalk, user, chats, setChats } = ChatState();
 
   const toast = useToast();
 
@@ -111,7 +113,9 @@ const MyChats = ({ fetchAgain }) => {
                       ) : chat.latestMessage.content.includes("img src") ? (
                         <b>photo</b>
                       ) : (
-                        parse(chat.latestMessage.content)
+                        parse(!trashTalk
+                          ? replaceWordsWithAsterisks(caesarDecipher(chat.latestMessage.content, 1234), Words)
+                          : caesarDecipher(chat.latestMessage.content, 1234))
                       )}
                     </Text>
                   )}
