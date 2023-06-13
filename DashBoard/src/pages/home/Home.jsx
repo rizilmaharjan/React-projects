@@ -10,14 +10,12 @@ const Home = () => {
         <div className=" w-full">
           <Navbar />
           <div className="flex justify-between gap-10 px-8 mt-6">
-
-          <Widgets />
-          <Widgets />
-          <Widgets />
-          <Widgets />
+            <Widgets type="user" />
+            <Widgets type="order" />
+            <Widgets type="earning" />
+            <Widgets type="balance" />
           </div>
-          
-          </div>
+        </div>
       </div>
     </>
   );
