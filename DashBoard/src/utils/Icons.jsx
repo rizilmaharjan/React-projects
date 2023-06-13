@@ -18,5 +18,8 @@ import ModeCommentOutlinedIcon from '@mui/icons-material/ModeCommentOutlined';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import KeyboardArrowUpOutlinedIcon from '@mui/icons-material/KeyboardArrowUpOutlined';
+import AccountBalanceWalletOutlinedIcon from '@mui/icons-material/AccountBalanceWalletOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import MonetizationOnOutlinedIcon from '@mui/icons-material/MonetizationOnOutlined';
 
-export {DashboardIcon,PersonOutlineOutlinedIcon,CategoryOutlinedIcon,BorderColorOutlinedIcon,LocalShippingIcon,QueryStatsOutlinedIcon, MonitorHeartOutlinedIcon, PsychologyOutlinedIcon, SettingsOutlinedIcon, AccountBoxOutlinedIcon, LogoutOutlinedIcon, EditNotificationsOutlinedIcon, LanguageOutlinedIcon, DarkModeOutlinedIcon, UnfoldMoreDoubleOutlinedIcon, NotificationsNoneOutlinedIcon, ModeCommentOutlinedIcon, MenuOutlinedIcon, SearchOutlinedIcon, KeyboardArrowUpOutlinedIcon}
+export {DashboardIcon,PersonOutlineOutlinedIcon,CategoryOutlinedIcon,BorderColorOutlinedIcon,LocalShippingIcon,QueryStatsOutlinedIcon, MonitorHeartOutlinedIcon, PsychologyOutlinedIcon, SettingsOutlinedIcon, AccountBoxOutlinedIcon, LogoutOutlinedIcon, EditNotificationsOutlinedIcon, LanguageOutlinedIcon, DarkModeOutlinedIcon, UnfoldMoreDoubleOutlinedIcon, NotificationsNoneOutlinedIcon, ModeCommentOutlinedIcon, MenuOutlinedIcon, SearchOutlinedIcon, KeyboardArrowUpOutlinedIcon,AccountBalanceWalletOutlinedIcon,ShoppingCartOutlinedIcon,MonetizationOnOutlinedIcon}
