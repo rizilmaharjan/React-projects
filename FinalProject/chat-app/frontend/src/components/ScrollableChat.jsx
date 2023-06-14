@@ -11,6 +11,9 @@ import { ChatState } from "../Context/ChatProvider";
 
 const ScrollableChat = ({ messages }) => {
   const { user } = ChatState();
+  const handleClick = ()=>{
+    console.log("hey you clicked")
+  }
 
   return (
     <ScrollableFeed>
@@ -31,6 +34,7 @@ const ScrollableChat = ({ messages }) => {
               </Tooltip>
             )}
             <span
+              onClick={handleClick}
               style={{
                 backgroundColor: `${
                   m.sender._id === user._id ? "#006AFF" : "#E4E6EB"
