@@ -3,6 +3,7 @@ import Navbar from "../../components/Navbar";
 import Widgets from "../../components/Widgets";
 import Chart from "../../components/Chart";
 import Featured from "../../components/Featured";
+import Tablee from "../../components/Table";
 
 const Home = () => {
   return (
@@ -20,6 +21,9 @@ const Home = () => {
           <div className="flex mt-8 gap-x-5 px-10">
             <Featured />
             <Chart />
+          </div>
+          <div>
+            <Tablee />
           </div>
         </div>
       </div>
