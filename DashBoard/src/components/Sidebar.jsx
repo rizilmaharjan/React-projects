@@ -16,7 +16,7 @@ import {
 const Sidebar = () => {
   return (
     <>
-      <div className="flex flex-col items-center py-4 border-r border-black h-full w-1/5 ">
+      <div className="flex flex-col items-center py-4 border-r border-black w-1/5 ">
         <div className="flex justify-center">
           <span className="text-purple-600 font-semibold text-2xl">Admin</span>
         </div>
