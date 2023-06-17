@@ -1,11 +1,18 @@
-import { LanguageOutlinedIcon, DarkModeOutlinedIcon, UnfoldMoreDoubleOutlinedIcon, NotificationsNoneOutlinedIcon, ModeCommentOutlinedIcon, MenuOutlinedIcon, SearchOutlinedIcon } from "../utils/Icons"
+import { LanguageOutlinedIcon, DarkModeOutlinedIcon, UnfoldMoreDoubleOutlinedIcon, NotificationsNoneOutlinedIcon, ModeCommentOutlinedIcon, MenuOutlinedIcon, SearchOutlinedIcon } from "../utils/Icons";
+import { myCustomContext } from "../context/ColorContext";
+import classNames from "classnames";
 const Navbar = () => {
+  const {darkMode} = myCustomContext();
   return (
     <>
-      <div className="border-b-2 px-4 py-1.5 flex items-center justify-between">
+      <div className={classNames("border-b-2 px-4 py-1.5 flex items-center justify-between",{
+        "text-white" : darkMode === true
+      })}>
         <div>
           <div className="relative my-2 ml-3">
-            <input className="border-2 outline-none py-1 px-2" type="text" placeholder="Search..." />
+            <input className={classNames("border-2 outline-none py-1 px-2",{
+              "bg-black" : darkMode === true
+            })} type="text" placeholder="Search..." />
             <SearchOutlinedIcon className="absolute right-2 top-2" />
 
           </div>
