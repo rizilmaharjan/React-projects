@@ -1,14 +1,14 @@
 import Sidebar from "../../components/Sidebar";
 import Navbar from "../../components/Navbar";
 import DataTable from "../../components/DataTable";
-const List = () => {
+const List = ({url}) => {
   return (
     <>
       <div className="flex">
           <Sidebar />
         <div className="w-full">
           <Navbar />
-          <DataTable />
+          <DataTable url={url} />
         </div>
       </div>
     </>
