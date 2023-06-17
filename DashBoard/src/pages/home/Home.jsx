@@ -20,7 +20,7 @@ const Home = () => {
           </div>
           <div className="flex mt-8 gap-x-5 px-10">
             <Featured />
-            <Chart />
+            <Chart title={"Last 6 Months (Revenue)"} aspect={2 / 1} />
           </div>
           <div>
             <Tablee />
