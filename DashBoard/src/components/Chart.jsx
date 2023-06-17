@@ -12,14 +12,14 @@ import {
 } from "recharts";
 import { Data } from "../data/Data";
 
-const Chart = () => {
+const Chart = ({title, aspect}) => {
   return (
     <>
       <div className="flex-[2] bg-white drop-shadow-lg py-4 px-3">
         <div className="mb-6">
-          <p className="text-[#908E9B]">Last 6 Months (Revenue)</p>
+          <p className="text-[#908E9B] opacity-40 ">{title}</p>
         </div>
-        <ResponsiveContainer width={"100%"} aspect={2 / 1}>
+        <ResponsiveContainer width={"100%"} aspect={aspect}>
           <AreaChart
             width={730}
             height={250}
