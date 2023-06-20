@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useQuery } from "react-query";
 
 const BASE_URL = 'https://youtube-v31.p.rapidapi.com'
 
@@ -14,8 +15,13 @@ const options = {
   }
 };
 
-export const fetchFromAPI = async(url)=>{
+ const fetchFromAPI = async(url)=>{
  const {data} = await axios.get(`${BASE_URL}/${url}`, options)
  return data;
 
 }
+
+const useFetchFromAPI = (url)=>{
+  return useQuery(["feed", url], () => fetchFromAPI(url))
+}
+export default useFetchFromAPI
