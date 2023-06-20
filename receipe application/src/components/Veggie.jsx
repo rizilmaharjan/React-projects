@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { NavLink } from "react-router-dom";
+import useFetchAPI from "./FetchAPI";
+
+
 
 const Veggie = () => {
   const [veggie, setVeggie] = useState([]);
+  
 
-  const getVeggie = async () => {
-    const check = localStorage.getItem("veggie");
-    if (check) {
-      setVeggie(JSON.parse(check));
-    } else {
-      const api = await axios.get(
-        "https://api.spoonacular.com/recipes/random?apiKey=18f7fdcd25ea43f78a4b397bddc46734&number=9&tags=vegetarian"
-      );
-      const Data = api.data;
-      setVeggie(Data.recipes);
-      localStorage.setItem("veggie", JSON.stringify(Data.recipes));
-    }
-  };
+  const { data } = useFetchAPI(
+       
+    "https://api.spoonacular.com/recipes/random?apiKey=18f7fdcd25ea43f78a4b397bddc46734&number=9&tags=vegetarian"
+  );
+ 
+    
   useEffect(() => {
-    getVeggie();
-  }, []);
+    if(data){
+      setVeggie(data.recipes)
+
+    }
+    
+  }, [data]);
+
+  console.log(data)
 
   return (
     <>

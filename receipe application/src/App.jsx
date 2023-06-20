@@ -5,17 +5,22 @@ import Search from "./components/Search";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { GiKnifeFork } from "react-icons/gi";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 const App = () => {
   return (
     <>
-      <Nav>
-        <Logo to={"/"}>
-          <GiKnifeFork />
-        </Logo>
-      </Nav>
-      <Search />
-      <Category />
-      <Pages />
+      <QueryClientProvider client={queryClient}>
+        <Nav>
+          <Logo to={"/"}>
+            <GiKnifeFork />
+          </Logo>
+        </Nav>
+        <Search />
+        <Category />
+        <Pages />
+      </QueryClientProvider>
     </>
   );
 };
