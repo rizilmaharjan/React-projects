@@ -4,9 +4,13 @@ import Error from "./Error";
 import SingleMovie from "./SingleMovie";
 import { Routes, Route } from "react-router-dom";
 
+
+
 const App = () => {
   return (
     <>
+    
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/movie/:id" element={<SingleMovie />} />
