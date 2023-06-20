@@ -1,46 +1,33 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { useQuery } from "react-query";
 import axios from "axios";
 
 const AppContext = createContext();
 export const API_URL = `http://www.omdbapi.com/?apikey=ca4d6674`;
 
 const Context = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [movie, setMovie] = useState([]);
-  const [isError, setIsError] = useState({
-    show: "false",
-    msg: "",
-  });
   const [query, setQuery] = useState("titanic");
+  const [movie, setMovie] = useState([])
+ 
   const getMovies = async (url) => {
-    setIsLoading(true);
     try {
       const res = await axios.get(url);
       const data = res.data;
 
       if (data.Response == "True") {
-        setIsLoading(false);
         setMovie(data.Search);
-        setIsError({
-          show: false,
-          msg: "",
-        });
+       
       } else {
-        setIsError({
-          show: true,
-          msg: data.Error,
-        });
+        throw new Error(data.Error)
       }
     } catch (error) {
-      console.log(error);
+      throw new Error(error)
     }
   };
-  useEffect(() => {
-    let timerOut = setTimeout(() => {
-      getMovies(`${API_URL}&s=${query}`);
-    }, 800);
-    return () => clearTimeout(timerOut);
-  }, [query]);
+  const {isLoading, isError} = useQuery(["movies", query],()=>{
+    getMovies(`${API_URL}&s=${query}`)
+   })
+ 
   return (
     <>
       <AppContext.Provider
