@@ -3,51 +3,34 @@ import { useParams, NavLink } from "react-router-dom";
 import { API_URL } from "./context/Context";
 import axios from "axios";
 import styled from "styled-components";
+import { useQuery } from "react-query";
 
 const SingleMovie = () => {
   const { id } = useParams();
 
-  const [isLoading, setIsLoading] = useState(true);
   const [movie, setMovie] = useState("");
-  const [isError, setIsError] = useState({
-    show: "false",
-    msg: "",
-  });
+
   const getMovies = async (url) => {
     try {
       const res = await axios.get(url);
       const data = res.data;
 
       if (data.Response == "True") {
-        setIsLoading(false);
         setMovie(data);
-        setIsError({
-          show: false,
-          msg: "",
-        });
       } else {
-        setIsError({
-          show: true,
-          msg: data.Error,
-        });
+        throw new Error(data.Error);
       }
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
-  useEffect(() => {
-    let timerOut = setTimeout(() => {
-      getMovies(`${API_URL}&i=${id}`);
-    }, 800);
-    return () => clearTimeout(timerOut);
-  }, [id]);
+
+  const { isLoading } = useQuery("movie", () => {
+    getMovies(`${API_URL}&i=${id}`);
+  });
 
   if (isLoading) {
-    return (
-      <div className="movie-section">
-        <div className="loading"></div>
-      </div>
-    );
+    return <span>Loading....</span>;
   }
 
   return (
@@ -144,11 +127,10 @@ const Wrapper = styled.section`
 
           &:hover::before {
             left: 0;
-
           }
-          &:hover{
+          &:hover {
             color: #fff;
-            cursor:pointer;
+            cursor: pointer;
             font-weight: 600;
           }
         }
