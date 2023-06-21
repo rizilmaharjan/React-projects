@@ -10,7 +10,7 @@ const SearchFeed = lazy(() => import("./components/SearchFeed"));
 import {
   QueryClient,
   QueryClientProvider,
-} from "react-query";
+} from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 const App = () => {
