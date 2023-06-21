@@ -1,29 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { NavLink } from "react-router-dom";
+import useFetchAPI from "./FetchAPI";
 
 const Popular = () => {
-  const [popular, setPopular] = useState([]);
-
-  const getPopular = async () => {
-    const check = localStorage.getItem("popular");
-    if (check) {
-      setPopular(JSON.parse(check));
-    } else {
-      const api = await axios.get(
-        "https://api.spoonacular.com/recipes/random?apiKey=18f7fdcd25ea43f78a4b397bddc46734&number=9"
-      );
-      const Data = api.data;
-      setPopular(Data.recipes);
-      localStorage.setItem("popular", JSON.stringify(Data.recipes));
-    }
-  };
-  useEffect(() => {
-    getPopular();
-  }, []);
+  const {
+    data: popular,
+    isLoading,
+    isError,
+    error,
+  } = useFetchAPI(
+    "https://api.spoonacular.com/recipes/random?apiKey=18f7fdcd25ea43f78a4b397bddc46734&number=9"
+  );
+  if (isLoading) return <p>Loading...</p>;
+  if (isError) return <p>{error.message}</p>;
 
   return (
     <>
@@ -39,11 +31,11 @@ const Popular = () => {
               gap: "5rem",
             }}
           >
-            {popular.map((item) => {
+            {popular.recipes?.map((item) => {
               return (
                 <SplideSlide key={item.id}>
                   <Card>
-                    <NavLink to={"/recipe/" + item.id} >
+                    <NavLink to={"/recipe/" + item.id}>
                       <p>{item.title}</p>
                       <img src={item.image} alt={item.title} />
                       <Gradient />
@@ -102,4 +94,3 @@ const Gradient = styled.div`
 `;
 
 export default Popular;
-

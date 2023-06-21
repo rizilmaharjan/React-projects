@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const FetchAPI = async (url) => {
@@ -7,7 +7,10 @@ const FetchAPI = async (url) => {
 };
 
 const useFetchAPI = (url) => {
-  return useQuery(["recipe", url], () => FetchAPI(url)); 
+  return useQuery(["recipe", url], () => FetchAPI(url),{
+    refetchOnMount: false,
+    refetchOnWindowFocus: false
+  }); 
 };
 
 export default useFetchAPI;

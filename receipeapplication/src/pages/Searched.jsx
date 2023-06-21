@@ -1,29 +1,19 @@
-import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import axios from "axios";
 import { NavLink } from "react-router-dom";
+import useFetchAPI from "../components/FetchAPI";
 
 const Searched = () => {
-  const [searchedRecipes, setSearchedRecipes] = useState([]);
   let params = useParams();
-  const getSearched = async (name) => {
-    try {
-      const api = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=18f7fdcd25ea43f78a4b397bddc46734&query=${name}`
-      );
-       const Data = api.data;
-      setSearchedRecipes(Data.results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getSearched(params.search);
-  }, [params.search]);
+  const { data: search, isLoading, isError, error } = useFetchAPI(
+    `https://api.spoonacular.com/recipes/complexSearch?apiKey=18f7fdcd25ea43f78a4b397bddc46734&query=${params.search}`
+  );
+  if(isLoading) return <p>Loading...</p>
+  if(isError) return <p>{error.message}</p>
+ 
   return (
     <Grid>
-      {searchedRecipes.map((item) => {
+      {search.results?.map((item) => {
         return (
           <Card key={item.id}>
             <NavLink to={"/recipe/"+item.id}>

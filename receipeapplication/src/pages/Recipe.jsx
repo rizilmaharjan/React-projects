@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 import styled from "styled-components";
+import useFetchAPI from "../components/FetchAPI";
 
 const Recipe = () => {
   let params = useParams();
-  const [details, setDetails] = useState({});
   const [activeTab, setActiveTab] = useState("instructions");
-  const fetchDetails = async () => {
-    const api = await axios.get(
-      `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=18f7fdcd25ea43f78a4b397bddc46734`
-    );
-    const Data = api.data;
-    console.log(Data);
-    setDetails(Data);
-  };
-  useEffect(() => {
-    fetchDetails();
-  }, [params.name]);
+  const { data: details, isLoading, isError, error } = useFetchAPI(
+    `https://api.spoonacular.com/recipes/${params.name}/information?apiKey=18f7fdcd25ea43f78a4b397bddc46734`
+  );
+  if(isLoading) return <p>Loading...</p>
+  if(isError) return <p>{error.message}</p>
+ 
+  
   return (
     <DetailWrapper>
       <div>
-        <h2>{details.title}</h2>
+        <h2>{details?.title}</h2>
         <img src={details.image} alt={details.title} />
       </div>
       <Info>

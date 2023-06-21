@@ -5,10 +5,11 @@ import Search from "./components/Search";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { GiKnifeFork } from "react-icons/gi";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-const queryClient = new QueryClient();
 const App = () => {
+  const queryClient = new QueryClient();
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -20,6 +21,7 @@ const App = () => {
         <Search />
         <Category />
         <Pages />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </>
   );

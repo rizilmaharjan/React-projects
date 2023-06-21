@@ -1,27 +1,22 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { NavLink, useParams } from "react-router-dom";
-import axios from "axios";
+import useFetchAPI from "../components/FetchAPI";
 
 const Cuisine = () => {
-  const [cuisine, setCuisine] = useState([]);
   let params = useParams();
+    const {
+      data: Cuisine,
+      isLoading,
+      isError,
+      error,
+    } = useFetchAPI(
+      `https://api.spoonacular.com/recipes/complexSearch?apiKey=18f7fdcd25ea43f78a4b397bddc46734&cuisine=${params.type}`
+    );
+    if (isLoading) return <p>Loading...</p>;
+    if (isError) return <p>{error.message}</p>;
 
-  const getCuisine = async (name) => {
-    try {
-      const api = await axios.get(
-        `https://api.spoonacular.com/recipes/complexSearch?apiKey=18f7fdcd25ea43f78a4b397bddc46734&cuisine=${name}`
-      );
-      const Data = api.data;
-      setCuisine(Data.results);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getCuisine(params.type);
-  }, [params]);
+  
   return (
     <>
       <Grid
@@ -30,7 +25,7 @@ const Cuisine = () => {
         exit={{opacity: 0}}
         transition={{duration: 0.5}}
       >
-        {cuisine.map((item) => {
+        {Cuisine.results?.map((item) => {
           return (
             <Card key={item.id}>
               <NavLink to={"/recipe/" + item.id}>

@@ -1,31 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import { NavLink } from "react-router-dom";
 import useFetchAPI from "./FetchAPI";
 
-
-
 const Veggie = () => {
-  const [veggie, setVeggie] = useState([]);
-  
-
-  const { data } = useFetchAPI(
-       
+  const { data: veggies, isLoading, isError, error } = useFetchAPI(
     "https://api.spoonacular.com/recipes/random?apiKey=18f7fdcd25ea43f78a4b397bddc46734&number=9&tags=vegetarian"
   );
- 
-    
-  useEffect(() => {
-    if(data){
-      setVeggie(data.recipes)
-
-    }
-    
-  }, [data]);
-
-  console.log(data)
+  if(isLoading) return <p>Loading...</p>
+  if(isError) return <p>{error.message}</p>
 
   return (
     <>
@@ -41,7 +26,7 @@ const Veggie = () => {
               gap: "5rem",
             }}
           >
-            {veggie.map((item) => {
+            {veggies.recipes?.map((item) => {
               return (
                 <SplideSlide key={item.id}>
                   <Card>
