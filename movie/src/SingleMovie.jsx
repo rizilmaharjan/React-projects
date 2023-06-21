@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, NavLink } from "react-router-dom";
 import { API_URL } from "./context/Context";
 import axios from "axios";
 import styled from "styled-components";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 const SingleMovie = () => {
   const { id } = useParams();
