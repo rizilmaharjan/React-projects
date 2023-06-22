@@ -1,6 +1,6 @@
 import React from "react";
 import Movies from "./Movies";
-import Search from "./Search";
+import Search from "./Search"
 
 const Home = () => {
   return (
