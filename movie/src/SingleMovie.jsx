@@ -26,7 +26,7 @@ const SingleMovie = () => {
   };
 
   const { isLoading } = useQuery("movie", () => {
-    getMovies(`${API_URL}&i=${id}`);
+    getMovies(`${API_URL}&i=${id}`)
   });
 
   if (isLoading) {
