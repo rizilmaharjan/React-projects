@@ -1,7 +1,7 @@
 import React from "react";
 import { UseGlobalContextHook } from "./context/Context";
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled from "styled-components"
 
 const Movies = () => {
   const { movie, isLoading } = UseGlobalContextHook();
