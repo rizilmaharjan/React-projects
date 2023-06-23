@@ -1,5 +1,5 @@
-import { useQuery } from "react-query";
-import axios from "axios";
+import { useQuery } from "react-query"
+import axios from "axios"
 const JokeSection = () => {
   const { isLoading, isError, data, error, refetch } = useQuery(
     "joke",
