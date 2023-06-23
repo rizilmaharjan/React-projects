@@ -1,4 +1,4 @@
-import JokeSection from "./JokeSection";
+import JokeSection from "./JokeSection"
 const JokePanel = () => {
   return (
     <>
