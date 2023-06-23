@@ -1,5 +1,5 @@
-import Title from "../components/Title";
-import JokePanel from "../components/JokePanel";
+import Title from "../components/Title"
+import JokePanel from "../components/JokePanel"
 const Joke = () => {
   return (
     <>
