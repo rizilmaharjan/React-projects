@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./index.css";
 
 // get the local storage data
@@ -13,21 +13,23 @@ const getLocalData = () => {
 };
 
 const ToDo = () => {
-  const [inputData, setInputData] = useState("");
   const [items, setItems] = useState(getLocalData());
   const [isEditItem, setIsEditItem] = useState("");
   const [toggleButton, setToggleButton] = useState(false);
 
+  const Todos = useRef()
+  console.log("🚀 ~ file: ToDo.js:21 ~ ToDo ~ Todos:", Todos)
+
   // Add items function
   const addItem = () => {
-    if (!inputData) {
+    if (!Todos.current.value) {
       alert("Please enter your items");
-    } else if (inputData && toggleButton) {
+    } else if (Todos.current.value && toggleButton) {
       const editedItemList = items.map((item)=>{
         if(item.id === isEditItem){
           return{
               ...item,
-              name: inputData
+              name: Todos.current.value
           }
         }
         return item
@@ -35,15 +37,16 @@ const ToDo = () => {
       setItems(editedItemList)
       setToggleButton(false)
       setIsEditItem("")
+      Todos.current.value = ""
 
      
     } else {
       const myNewInputData = {
         id: new Date().getTime().toString(),
-        name: inputData,
+        name: Todos.current.value,
       };
       setItems([...items, myNewInputData]);
-      setInputData("");
+      Todos.current.value = ""
     }
   };
   // To Delete the items
@@ -69,7 +72,7 @@ const ToDo = () => {
     const editedItem = items.find((item)=>{
       return item.id === edElem
     })
-    setInputData(editedItem.name)
+    Todos.current.value = editedItem.name
     setIsEditItem(edElem)
     setToggleButton(true)
    
@@ -85,10 +88,11 @@ const ToDo = () => {
           </figure>
           <div className="addItems">
             <input
+              ref={Todos}
               type="text"
               placeholder="✍ Add Item"
-              value={inputData}
-              onChange={(e) => setInputData(e.target.value)}
+              
+            
               className="form-control"
             />
             {toggleButton ? (
