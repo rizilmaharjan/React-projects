@@ -1,6 +1,6 @@
 import { useShopContext } from "../context/ShopContext";
 export default function CartItem({ data }) {
-    const {CartItems} = useShopContext()
+    const {cartItems, addToCart, removeFromCart, updateCartItemCount } = useShopContext()
     const {id, productImage, productName, price} = data
   return (
     <>
@@ -13,9 +13,9 @@ export default function CartItem({ data }) {
             </p>
             <p>${price}</p>
             <div>
-                <button>-</button>
-                <input value={CartItems[id]} />
-                <button>+</button>
+                <button onClick={()=>removeFromCart(id)}>-</button>
+                <input className="border-2 w-14 text-center" value={cartItems[id]} onChange={(e)=>updateCartItemCount(Number(e.target.value), id)}  />
+                <button onClick={()=>addToCart(id)}>+</button>
             </div>
           </div>
         </div>
