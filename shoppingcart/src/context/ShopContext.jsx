@@ -13,6 +13,17 @@ const getDefaultCart = ()=>{
 export default function ShopContext({children}) {
     const [cartItems, setCartItems] = useState(getDefaultCart())
 
+    const getTotalCartAmount = ()=>{
+        let totalAmount = 0;
+        for(const item in cartItems){
+            if(cartItems[item] > 0){
+                let itemInfo = Products.find((product)=>product.id === Number(item))
+                totalAmount += cartItems[item] * itemInfo.price
+            }
+        }
+        return totalAmount
+    }
+
     const addToCart = (itemId) =>{
         setCartItems((prev)=>({
             ...prev,
@@ -26,9 +37,16 @@ export default function ShopContext({children}) {
             [itemId]:prev[itemId] - 1
         }))
     }
-    console.log(cartItems)
+    const updateCartItemCount = (newAmount, itemId) =>{
+        setCartItems((prev)=>(
+            {
+                ...prev,
+                [itemId]: newAmount
+            }
+        ))
+    }
   return (
-    <shopContext.Provider value={{cartItems, addToCart, removeFromCart}}>
+    <shopContext.Provider value={{cartItems, addToCart,getTotalCartAmount, removeFromCart, updateCartItemCount}}>
         {children}
       
     </shopContext.Provider>
