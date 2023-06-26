@@ -1,4 +1,4 @@
-import { createContext } from "react"
+import { createContext, useContext, useState } from "react"
 import { Products } from "../Products";
 
 const shopContext = createContext(null)
@@ -26,6 +26,7 @@ export default function ShopContext({children}) {
             [itemId]:prev[itemId] - 1
         }))
     }
+    console.log(cartItems)
   return (
     <shopContext.Provider value={{cartItems, addToCart, removeFromCart}}>
         {children}
