@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+import { createContext, useContext, useState } from "react"
 
 const ShoppingCartContext = createContext({})
 export function useShoppingCart(){
@@ -8,6 +8,14 @@ export function useShoppingCart(){
 
 export function ShoppingCartProvider({children}) {
     const [cartItems, setCartItems] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
+    const cartQuantity = cartItems.reduce((quantity,item)=>{
+        return item.quantity + quantity
+    },0)
+
+    const openCart = ()=>setIsOpen(true)
+    const closeCart = ()=>setIsOpen(false)
+
     function getItemQuantity(id){
         return cartItems.find(item => item.id === id)?.quantity ||0
     }
@@ -39,7 +47,7 @@ export function ShoppingCartProvider({children}) {
                     if(item.id === id){
                         return {
                             ...item,
-                            quantity: item.quantity + 1
+                            quantity: item.quantity - 1
                         }
                     }else{
                         return item
@@ -49,9 +57,15 @@ export function ShoppingCartProvider({children}) {
         })
 
     }
+
+    function removeFromCart(id){
+        setCartItems(currItems =>{
+            return currItems.filter(item => item.id !== id)
+        })
+    }
     
   return (
-   <ShoppingCartContext.Provider value={{getItemQuantity, increaseCartQuantity}}>
+   <ShoppingCartContext.Provider value={{getItemQuantity, openCart, closeCart, increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity}}>
     {children}
    </ShoppingCartContext.Provider>
   )
