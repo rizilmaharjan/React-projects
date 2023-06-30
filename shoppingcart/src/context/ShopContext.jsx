@@ -24,6 +24,28 @@ export default function ShopContext({children}) {
         return totalAmount
     }
 
+    const addToCart = (id)=>{
+        setCartItems(prev=>({
+            ...prev,
+            [id]: prev[id] + 1
+        }))
+
+    }
+
+    const removeFromCart = (id)=>{
+        setCartItems(prev=>({
+            ...prev,
+            [id]: prev[id] - 1
+        }))
+    }
+
+    const updateCartItemCount = (val, id)=>{
+        setCartItems(prev=>({
+            ...prev,
+            [id]: val
+        }))
+    }
+
    
   return (
     <shopContext.Provider value={{cartItems, addToCart,getTotalCartAmount, removeFromCart, updateCartItemCount}}>
