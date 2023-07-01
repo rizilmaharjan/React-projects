@@ -1,7 +1,9 @@
+import { Header } from "../components/Header"
 export const List = () => {
   return (
     <>
-        List page
+      <Header type={"list"} />
+       
     </>
   )
 }
