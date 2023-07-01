@@ -1,0 +1,186 @@
+import { FaBed } from "react-icons/fa";
+import { IoIosAirplane } from "react-icons/io";
+import { AiFillCar } from "react-icons/ai";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import { format } from "date-fns";
+import {
+  BsFillTaxiFrontFill,
+  BsFillCalendarDateFill,
+  BsFillPersonFill,
+} from "react-icons/bs";
+import { DateRange } from "react-date-range";
+import { useState } from "react";
+export const Header = ({ type }) => {
+  const [openDate, setOpenDate] = useState(false);
+  const [openOptions, setOpenOptions] = useState(false);
+  const [options, setOptions] = useState({
+    adult: 1,
+    children: 0,
+    room: 1,
+  });
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
+  const handleOptions = (name, operation) => {
+    setOptions((prev) => ({
+      ...prev,
+      [name]: operation === "i" ? prev[name] + 1 : prev[name] - 1,
+    }));
+  };
+
+  return (
+    <>
+      <header className={`bg-blue-900 ${type === "list" ? "pb-8" : "pb-20"} `}>
+        <div className="w-2/3 mx-auto relative">
+          <div className="flex gap-10 pt-6">
+            <div className="flex items-center">
+              <FaBed size={25} color="white" />
+              <span className="text-white text-sm ml-3">Stays</span>
+            </div>
+            <div className="flex items-center">
+              <IoIosAirplane size={25} color="white" />
+              <span className="text-white text-sm ml-3">Flights</span>
+            </div>
+            <div className="flex items-center">
+              <AiFillCar size={25} color="white" />
+              <span className="text-white text-sm ml-3">Car rentals</span>
+            </div>
+            <div className="flex items-center">
+              <FaBed size={25} color="white" />
+              <span className="text-white text-sm ml-3">Attractions</span>
+            </div>
+            <div className="flex items-center">
+              <BsFillTaxiFrontFill size={25} color="white" />
+              <span className="text-white text-sm ml-3">Airport taxis</span>
+            </div>
+          </div>
+          {type !== "list" && (
+            <div>
+              <div className="text-white mt-10">
+                <h1 className="text-2xl font-bold mb-4">
+                  A lifetime of discounts? It's Genius.
+                </h1>
+                <p className="mb-3">
+                  Get rewarded for your travels-unlock instant savings of 10% or
+                  more with a free Lamabooking account
+                </p>
+                <button className="bg-sky-600 text-white px-3 py-1">
+                  Sign in/Register
+                </button>
+              </div>
+
+              <div className="flex justify-around items-center border-2 border-yellow-400 rounded-md py-2 px-3 w-full text-black bg-white absolute bottom-[-6.6rem]">
+                <div className="flex items-center gap-2">
+                  <FaBed color="lightGray" />
+                  <input
+                    className="outline-none"
+                    type="text"
+                    placeholder="Where are you going?"
+                  />
+                </div>
+                <div className="flex items-center gap-2">
+                  <BsFillCalendarDateFill color="lightGray" />
+                  <span
+                    onClick={() => setOpenDate(!openDate)}
+                    className="text-gray-400"
+                  >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+                    date[0].endDate,
+                    "MM/dd/yyyy"
+                  )} `}</span>
+                  {openDate && (
+                    <DateRange
+                      editableDateInputs={true}
+                      onChange={(item) => setDate([item.selection])}
+                      moveRangeOnFirstSelection={false}
+                      ranges={date}
+                      className="absolute top-[50px] z-[20]"
+                    />
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <BsFillPersonFill color="lightGray" />
+                  <span
+                    onClick={() => setOpenOptions(!openOptions)}
+                    className="text-gray-400"
+                  >{`${options.adult} adult . ${options.children} children . ${options.room} room`}</span>
+                  {openOptions && (
+                    <div className="absolute z-[20] top-[50px] bg-white shadow-xl w-52 px-4 py-6  text-gray-400 rounded-md">
+                      <div className="flex items-center justify-between my-2">
+                        <span>Adult</span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            disabled={options.adult <= 1}
+                            className="border border-black px-3 py-1"
+                            onClick={() => handleOptions("adult", "d")}
+                          >
+                            -
+                          </button>
+                          <span>{options.adult}</span>
+                          <button
+                            className="border border-black px-3 py-1"
+                            onClick={() => handleOptions("adult", "i")}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between my-2">
+                        <span>Children</span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            disabled={options.children <= 0}
+                            className="border border-black px-3 py-1"
+                            onClick={() => handleOptions("children", "d")}
+                          >
+                            -
+                          </button>
+                          <span>{options.children}</span>
+                          <button
+                            className="border border-black px-3 py-1"
+                            onClick={() => handleOptions("children", "i")}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span>Room</span>
+                        <div className="flex items-center gap-2">
+                          <button
+                            disabled={options.room <= 1}
+                            className="border border-black px-3 py-1"
+                            onClick={() => handleOptions("room", "d")}
+                          >
+                            -
+                          </button>
+                          <span>{options.room}</span>
+                          <button
+                            className="border border-black px-3 py-1"
+                            onClick={() => handleOptions("room", "i")}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <button className="bg-sky-600 text-white px-3 py-1">
+                    Search
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+    </>
+  );
+};
