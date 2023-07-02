@@ -11,8 +11,10 @@ import {
 } from "react-icons/bs";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 export const Header = ({ type }) => {
   const [openDate, setOpenDate] = useState(false);
+  const [destination, setDestination] = useState("");
   const [openOptions, setOpenOptions] = useState(false);
   const [options, setOptions] = useState({
     adult: 1,
@@ -27,12 +29,19 @@ export const Header = ({ type }) => {
     },
   ]);
 
+  const navigate = useNavigate()
+
   const handleOptions = (name, operation) => {
     setOptions((prev) => ({
       ...prev,
       [name]: operation === "i" ? prev[name] + 1 : prev[name] - 1,
     }));
   };
+
+  const handleSearch = ()=>{
+    navigate("/hotels", {state: {destination,date,options}})
+
+  }
 
   return (
     <>
@@ -82,6 +91,7 @@ export const Header = ({ type }) => {
                     className="outline-none"
                     type="text"
                     placeholder="Where are you going?"
+                    onChange={e=>setDestination(e.target.value)}
                   />
                 </div>
                 <div className="flex items-center gap-2">
@@ -100,6 +110,7 @@ export const Header = ({ type }) => {
                       moveRangeOnFirstSelection={false}
                       ranges={date}
                       className="absolute top-[50px] z-[20]"
+                      minDate={new Date()}
                     />
                   )}
                 </div>
@@ -172,7 +183,7 @@ export const Header = ({ type }) => {
                   )}
                 </div>
                 <div>
-                  <button className="bg-sky-600 text-white px-3 py-1">
+                  <button onClick={handleSearch} className="bg-sky-600 text-white px-3 py-1">
                     Search
                   </button>
                 </div>
