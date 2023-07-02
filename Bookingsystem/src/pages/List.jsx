@@ -1,4 +1,4 @@
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Header } from "../components/Header";
 import { useState } from "react";
 import format from "date-fns/format";
@@ -14,8 +14,8 @@ export const List = () => {
   return (
     <>
       <Header type={"list"} />
-      <div className="flex justify-evenly">
-        <div className="bg-[#febb02] px-3 pt-3 pb-2 rounded-lg sticky top-10 w-72">
+      <div className="flex w-fit mx-auto my-4">
+        <div className="bg-[#febb02] px-3 pt-3 pb-2 rounded-lg sticky top-4 w-72 h-fit">
           <h1 className="font-bold text-2xl text-gray-600">Search</h1>
           <div className="mt-3 mb-2">
             <p className="text-sm">Destination</p>
@@ -27,10 +27,10 @@ export const List = () => {
           </div>
           <div className="mb-2">
             <p className="text-sm">Check-in-date</p>
-            <span onClick={()=>setOpenDate(!openDate)}>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+            <p className="bg-white py-1 px-2" onClick={()=>setOpenDate(!openDate)}>{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
               date[0].endDate,
               "MM/dd/yyyy"
-            )} `}</span>
+            )} `}</p>
             {openDate && (
               <DateRange
                 editableDateInputs={true}
@@ -96,7 +96,12 @@ export const List = () => {
             </button>
           </div>
         </div>
-        <div>
+        <div className="ml-3">
+          <SearchItem />
+          <SearchItem />
+          <SearchItem />
+          <SearchItem />
+          <SearchItem />
           <SearchItem />
 
         </div>
