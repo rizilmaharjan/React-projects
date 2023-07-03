@@ -2,12 +2,52 @@ import { Header } from "../components/Header";
 import { BiSolidMap } from "react-icons/bi";
 import { HotelData } from "../datas/HotelsPic";
 import { Mail } from "../components/Mail";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { MdOutlineCancel } from "react-icons/md";
+
+
+import { useState } from "react";
 
 export const Hotel = () => {
+  const [slideNumber,setSlideNumber] = useState(0)
+  const [open,setOpen] = useState(false)
+  const handleOpen = (i)=>{
+    setSlideNumber(i)
+    setOpen(true)
+
+  }
+
+  const handleMove = (direction)=>{
+    let newSlideNum;
+    if(direction === "l"){
+      newSlideNum = slideNumber === 0 ? HotelData.length - 1 : slideNumber - 1; 
+    }else{
+      newSlideNum = slideNumber === HotelData.length - 1 ? 0 : slideNumber + 1; 
+
+
+    }
+    setSlideNumber(newSlideNum)
+
+  }
   return (
     <>
       <Header type={"list"} />
-      <div className="w-11/12 mx-auto py-4">
+      <div className="mx-auto pt-4">
+        {
+          open && (
+            <div className="sticky left-0 mt-[-1rem] top-0 w-[100%] h-screen bg-[rgba(0,0,0,0.426)] z-[999] flex items-center">
+              <MdOutlineCancel onClick={()=>setOpen(false)} className="absolute right-20 top-2" size={40} color="lightGray" />
+            <AiOutlineLeft onClick={()=>handleMove("l")} color="lightGray" size={40} />
+            <div className="w-full h-full flex items-center justify-center">
+              <img className=" h-[80vh] w-[80%] object-cover" src={HotelData[slideNumber].image} alt="image" />
+            </div>
+            <AiOutlineRight onClick={()=>handleMove("r")} color="lightGray" size={40} />
+          </div>
+          
+
+
+          )
+        }
         <div>
           <h1 className="font-bold text-2xl">Grand Hotel</h1>
           <p className="text-sm py-2 flex items-center gap-2">
@@ -22,10 +62,11 @@ export const Hotel = () => {
           </p>
         </div>
         <div className="flex flex-wrap gap-4">
-          {HotelData.map((item) => {
+          {HotelData.map((item,i) => {
             return (
               <div className="w-[25rem]" key={item.id}>
                 <img
+                  onClick={()=>handleOpen(i)}
                   className="h-full"
                   src={item.image}
                   alt="hotels"
