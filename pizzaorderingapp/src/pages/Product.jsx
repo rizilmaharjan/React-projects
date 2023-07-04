@@ -10,8 +10,8 @@ export const Product = () => {
   return (
     <>
       <div className="flex justify-center gap-10 flex-wrap mt-8">
-        <div>
-          <img src="/images/pizza.png" alt="pizza" />
+        <div className="w-[220px] md:w-auto ">
+          <img src="/images/pizza.png" className="w-full" alt="pizza" />
         </div>
         <div className="w-1/2">
           <div>
@@ -24,7 +24,7 @@ export const Product = () => {
               sit aperiam iure tempore, fuga numquam repellendus ea obcaecati
               odio quibusdam perspiciatis eius dicta?
             </p>
-            <h2 className="font-bold mt-8 text-lg">Choose the size</h2>
+            <h2 className="font-bold mt-8 text-2xl md:text-lg">Choose the size</h2>
           </div>
           <div className="flex items-center gap-10 mt-6">
             <div className="relative" onClick={() => handleClick("s")}>
@@ -47,10 +47,10 @@ export const Product = () => {
             </div>
           </div>
           <div>
-            <h1 className="font-bold text-lg py-3">
+            <h1 className="font-bold text-md md:text-lg py-5">
               Choose additional ingredients
             </h1>
-            <div className="flex gap-3">
+            <div className="flex flex-col md:flex-row gap-3">
               <div>
                 <input type="checkbox" />
                 <label>Double ingredients</label>
