@@ -7,29 +7,26 @@ import { settings } from "../utils/Caraousel";
 export const SliderComp = () => {
   return (
     <>
+      <div className="overflow-hidden">
         <Slider {...settings}>
           {SliderData.map((item) => {
             return (
               <div
                 key={item.id}
-                className="bg-orange-700 myDisplay h-screen items-center justify-center"
+                className="bg-orange-700 myDisplay justify-center"
               >
-                <div className="h-fit w-fit">
+                <div className="w-[75%]">
                   <img
-                    className="h-[25rem] w-[25rem] "
+                    className="w-full object-cover"
                     src={item.image}
                     alt="images"
                   />
-                </div>
-                <div className="h-fit">
-                  <h1 className="text-7xl capitalize text-white font-semibold">
-                    {item.info}
-                  </h1>
                 </div>
               </div>
             );
           })}
         </Slider>
+      </div>
     </>
   );
 };
