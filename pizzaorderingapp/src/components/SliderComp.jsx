@@ -15,7 +15,7 @@ export const SliderComp = () => {
                 key={item.id}
                 className="bg-orange-700 myDisplay justify-center"
               >
-                <div className="w-[75%]">
+                <div className="w-[78%]">
                   <img
                     className="w-full object-cover"
                     src={item.image}
