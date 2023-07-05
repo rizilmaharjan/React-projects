@@ -5,6 +5,7 @@ import { Home } from "./pages/Home";
 import { Routes, Route } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Cart } from "./pages/Cart";
+import { Contact } from "./pages/Contact";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
 
         <Footer />
