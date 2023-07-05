@@ -1,45 +1,58 @@
 import { GiFullPizza } from "react-icons/gi";
-import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { pizzaData } from "../data/pizzaData";
 export const Product = () => {
-  const [pizzaPrice, setPizzaPrice] = useState(14);
+  const [pizzaPrice, setPizzaPrice] = useState(null);
+  const [selectedSize, setSelectedSize] = useState("small")
+  const {id} = useParams();
+  const filteredPizza = pizzaData.find(item=>item.id === Number(id))
+  useEffect(()=>{
+    setPizzaPrice(filteredPizza.price)
+
+  },[])
   const handleClick = (size) => {
-    if (size === "s") return setPizzaPrice(14);
-    if (size === "m") return setPizzaPrice(20);
-    if (size === "l") return setPizzaPrice(25);
+    setSelectedSize(size)
+    if(size === "small") return setPizzaPrice(filteredPizza.price)
+    if (size === "medium") return setPizzaPrice((filteredPizza.price*2).toFixed(2));
+    if (size === "large") return setPizzaPrice((filteredPizza.price*3).toFixed(2));
   };
+
+
+  
   return (
     <>
-      <div className="flex justify-center gap-10 flex-wrap mt-8">
-        <div className="w-[220px] md:w-auto ">
-          <img src="/images/pizza.png" className="w-full" alt="pizza" />
+      <div className="flex justify-center items-start flex-col md:flex-row md:gap-20 mt-5 md:mt-8 px-5">
+        <div className="w-1/3">
+          <img src={filteredPizza.image} className="w-full" alt="pizza" />
         </div>
-        <div className="w-1/2">
+        <div className="md:w-1/2">
           <div>
-            <h1 className="uppercase mt-10 font-bold text-4xl">campagnola</h1>
-            <p className="mt-10 text-2xl text-red-600 font-semibold">
-              <u>${pizzaPrice}</u>
+            <h1 className="uppercase mt-5 md:mt-10 font-bold text-xl md:text-4xl">{filteredPizza.name}</h1>
+            <p className="mt-2 md:mt-10 text-2xl text-red-600 font-semibold">
+              <u>${pizzaPrice}</u> <span className="font-semibold text-lg">({selectedSize})</span>
             </p>
-            <p className="mt-3">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Veniam
-              sit aperiam iure tempore, fuga numquam repellendus ea obcaecati
-              odio quibusdam perspiciatis eius dicta?
+            <p className="mt-3 text-justify">
+             {
+              filteredPizza.para
+             }
             </p>
             <h2 className="font-bold mt-8 text-2xl md:text-lg">Choose the size</h2>
           </div>
           <div className="flex items-center gap-10 mt-6">
-            <div className="relative" onClick={() => handleClick("s")}>
+            <div className="relative" onClick={() => handleClick("small")}>
               <GiFullPizza size={30} />
               <span className="absolute top-[-3px] left-4 bg-blue-400 text-white text-xs rounded-lg px-1">
                 Small
               </span>
             </div>
-            <div className="relative" onClick={() => handleClick("m")}>
+            <div className="relative" onClick={() => handleClick("medium")}>
               <GiFullPizza size={40} />
               <span className="absolute top-[-3px] left-4 bg-blue-400 text-white text-xs rounded-lg px-1">
                 Medium
               </span>
             </div>
-            <div className="relative" onClick={() => handleClick("l")}>
+            <div className="relative" onClick={() => handleClick("large")}>
               <GiFullPizza size={50} />
               <span className="absolute top-[-3px] left-4 bg-blue-400 text-white text-xs rounded-lg px-1">
                 Large
