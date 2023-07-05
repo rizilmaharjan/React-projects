@@ -75,10 +75,10 @@ const HeroSection = () => {
                 />
               </div>
             </div>
-            <div className="py-7 pl-8 pr-10 mt-8 h-72 text-white rounded-xl bg-blue-600 md:flex md:justify-between md:items-center md:h-48 md:rounded-r-full lg:h-40 lg:pl-10 lg:rounded-tl-3xl">
+            <div className="py-7 pl-8 pr-10 mt-8 h-48 text-white rounded-xl bg-blue-600 md:flex md:justify-between md:items-center md:h-48 md:rounded-r-full lg:h-40 lg:pl-10 lg:rounded-tl-3xl">
               <div className="text-center my-16">
                 <div className="lg:hidden mt-[-4rem]">
-                  <p className="font-semibold text-3xl pb-3">Your BMI is...</p>
+                  <p className="font-semibold text-sm pt-8 md:text-3xl pb-3">Your BMI is...</p>
                   {
                     Number.isNaN(bmi) ? (
                       <h1 className="text-bold text-5xl">0</h1>
