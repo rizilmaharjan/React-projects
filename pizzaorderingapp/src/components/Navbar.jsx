@@ -37,6 +37,9 @@ export const Navbar = () => {
             <NavLink to={"/contact"} onClick={handleClick}>
               <li className="px-4">Contact</li>
             </NavLink>
+            <NavLink className={"md:hidden"} to={"/cart"} onClick={handleClick}>
+              <li className="px-4">Cart</li>
+            </NavLink>
           </ul>
         </div>
         <div className="relative px-2 hidden md:block">
