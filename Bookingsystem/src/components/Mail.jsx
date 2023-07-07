@@ -3,17 +3,17 @@ export const Mail = () => {
     <>
       <div className="bg-blue-800 flex flex-col items-center pb-8">
         <div className="pt-14">
-          <h1 className="text-white font-semibold text-xl">
+          <h1 className="text-white font-semibold text-lg md:text-xl">
             Save time, save money!
           </h1>
-          <p className="text-white">
+          <p className="text-white text-sm md:text-md">
             Sign up and we'll send the best deals to you
           </p>
         </div>
         <div>
-          <div className="flex items-center gap-2 pt-7">
+          <div className="flex items-center justify-center gap-2 pt-7">
             <input
-              className="w-80 outline-none py-2 px-1 text-gray-400 font-semibold"
+              className="w-56 md:w-80 outline-none py-2 px-1 text-gray-400 font-semibold"
               type="text"
               placeholder="Your Email "
             />
@@ -23,7 +23,7 @@ export const Mail = () => {
           </div>
           <div className="flex gap-2 mt-2">
             <input type="checkbox" />
-            <p className="text-white">
+            <p className="text-white text-sm md:text-md">
               Send me a link to get the FREE Booking.com app!
             </p>
           </div>
@@ -36,7 +36,7 @@ export const Mail = () => {
           </button>
         </div>
         <hr />
-        <div className="w-fit mx-auto py-2 mb-2">
+        <div className="w-fit px-4 text-center md:px-0 mx-auto py-2 mb-2">
           <span className="text-white underline px-2 font-bold">
             Mobile version
           </span>
@@ -58,7 +58,7 @@ export const Mail = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-5 w-fit mx-auto pt-2 pb-24 text-sm gap-10 text-blue-700">
+      <div className="grid grid-cols-3 md:grid-cols-5 md:w-fit md:mx-auto pt-2 pb-24 px-4 md:px-0 text-sm gap-10 text-blue-700">
         <div>
             <p>Countries</p>
             <p>Regions</p>
@@ -92,7 +92,7 @@ export const Mail = () => {
             <p>Restaurant reservations</p>
             <p>Booking.com for Travel Agents</p>
         </div>
-        <div>
+        <div className="w-screen md:w-fit">
             <p>Coronavirus (COVID-19) FAQS</p>
             <p>About Booking.com</p>
             <p>Customer Service Help</p>
