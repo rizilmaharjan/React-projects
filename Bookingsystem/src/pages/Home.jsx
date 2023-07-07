@@ -11,8 +11,8 @@ export const Home = () => {
     <>
       <Header />
         {/* properties */}
-        <div className="mt-14 w-fit mx-auto">
-          <div className="flex gap-4 px-3">
+        <div className="mt-14 w-fit mx-auto px-4">
+          <div className="flex gap-4 flex-wrap px-3">
 
           {FeaturedData.map((item) => {
             return (
@@ -30,11 +30,11 @@ export const Home = () => {
         
 
         
-        <div className=" mx-auto w-fit">
+        <div className=" mx-auto w-fit px-4">
           <h1 className="font-bold px-3 py-6 text-xl">
             Browse by property type
           </h1>
-          <div className="flex gap-4 px-3">
+          <div className="flex flex-wrap gap-4 px-3">
             {propertyTypeData.map((item) => {
               return (
                 <Properties
@@ -48,11 +48,11 @@ export const Home = () => {
           </div>
         </div>
 
-        <div className="mx-auto w-fit">
+        <div className="mx-auto w-fit px-4">
           <h1 className="font-bold px-3 py-6 text-xl">
             Home guests love
           </h1>
-          <div className="flex gap-4 px-3">
+          <div className="flex flex-wrap gap-4 px-3">
             {HomeGuestData.map((item) => {
               return (
                 <HomeGuests key={item.id}
