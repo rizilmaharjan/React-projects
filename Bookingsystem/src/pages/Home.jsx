@@ -1,11 +1,11 @@
-import { Header } from "../components/Header";
-import { Featured } from "../components/Featured";
-import { FeaturedData } from "../datas/FeaturedData";
-import { Properties } from "../components/Properties";
-import { propertyTypeData } from "../datas/propertyTypeData";
-import { HomeGuestData } from "../datas/HomesGuest";
-import { HomeGuests } from "../components/HomeGuests";
-import { Mail } from "../components/Mail";
+import { Header } from "../components/Header"
+import { Featured } from "../components/Featured"
+import { FeaturedData } from "../datas/FeaturedData"
+import { Properties } from "../components/Properties"
+import { propertyTypeData } from "../datas/propertyTypeData"
+import { HomeGuestData } from "../datas/HomesGuest"
+import { HomeGuests } from "../components/HomeGuests"
+import { Mail } from "../components/Mail"
 export const Home = () => {
   return (
     <>
