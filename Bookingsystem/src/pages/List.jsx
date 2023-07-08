@@ -1,14 +1,14 @@
-import { useLocation } from "react-router-dom";
-import { Header } from "../components/Header";
-import { useState } from "react";
-import format from "date-fns/format";
-import { DateRange } from "react-date-range";
-import { SearchItem } from "../components/SearchItem";
+import { useLocation } from "react-router-dom"
+import { Header } from "../components/Header"
+import { useState } from "react"
+import format from "date-fns/format"
+import { DateRange } from "react-date-range"
+import { SearchItem } from "../components/SearchItem"
 export const List = () => {
-  const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
-  const [options, setOptions] = useState(location.state.options);
+  const location = useLocation()
+  const [destination, setDestination] = useState(location.state.destination)
+  const [date, setDate] = useState(location.state.date)
+  const [options, setOptions] = useState(location.state.options)
   const [openDate, setOpenDate] = useState(false);
 
   return (
