@@ -1,15 +1,5 @@
-import { FaBed } from "react-icons/fa";
-import { IoIosAirplane } from "react-icons/io";
-import { AiFillCar } from "react-icons/ai";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { format } from "date-fns";
-import {
-  BsFillTaxiFrontFill,
-  BsFillCalendarDateFill,
-  BsFillPersonFill,
-} from "react-icons/bs";
-import { DateRange } from "react-date-range";
 import { useState } from "react";
 export const Navbar = () => {
   const [openDate, setOpenDate] = useState(false);
