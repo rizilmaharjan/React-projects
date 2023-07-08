@@ -1,12 +1,12 @@
-import { Header } from "../components/Header";
-import { BiSolidMap } from "react-icons/bi";
-import { HotelData } from "../datas/HotelsPic";
-import { Mail } from "../components/Mail";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
-import { MdOutlineCancel } from "react-icons/md";
+import { Header } from "../components/Header"
+import { BiSolidMap } from "react-icons/bi"
+import { HotelData } from "../datas/HotelsPic"
+import { Mail } from "../components/Mail"
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai"
+import { MdOutlineCancel } from "react-icons/md"
 
 
-import { useState } from "react";
+import { useState } from "react"
 
 export const Hotel = () => {
   const [slideNumber,setSlideNumber] = useState(0)
