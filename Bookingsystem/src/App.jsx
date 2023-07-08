@@ -1,9 +1,9 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { Home } from "./pages/Home";
-import { List } from "./pages/List";
-import { Hotel } from "./pages/Hotel";
-import { Navbar } from "./components/Navbar";
-import { Error } from "./pages/Error";
+import { Route, Routes, BrowserRouter } from "react-router-dom"
+import { Home } from "./pages/Home"
+import { List } from "./pages/List"
+import { Hotel } from "./pages/Hotel"
+import { Navbar } from "./components/Navbar"
+import { Error } from "./pages/Error"
 export default function App() {
   return (
     <>
