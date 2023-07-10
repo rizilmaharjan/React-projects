@@ -46,36 +46,36 @@ export const Header = ({ type }) => {
   return (
     <>
       <header className={`bg-blue-900 ${type === "list" ? "pb-8" : "pb-20"} `}>
-        <div className="w-2/3 mx-auto relative">
-          <div className="flex gap-10 pt-6">
+        <div className="md:w-2/3 md:mx-auto relative px-2">
+          <div className="flex md:gap-10 pt-6">
             <div className="flex items-center">
-              <FaBed size={25} color="white" />
+              <FaBed className="text-xl md:text-3xl" color="white" />
               <span className="text-white text-sm ml-3">Stays</span>
             </div>
             <div className="flex items-center">
-              <IoIosAirplane size={25} color="white" />
+              <IoIosAirplane className="text-xl md:text-3xl" color="white" />
               <span className="text-white text-sm ml-3">Flights</span>
             </div>
             <div className="flex items-center">
-              <AiFillCar size={25} color="white" />
+              <AiFillCar className="text-xl md:text-3xl" color="white" />
               <span className="text-white text-sm ml-3">Car rentals</span>
             </div>
             <div className="flex items-center">
-              <FaBed size={25} color="white" />
+              <FaBed className="text-xl md:text-3xl" color="white" />
               <span className="text-white text-sm ml-3">Attractions</span>
             </div>
             <div className="flex items-center">
-              <BsFillTaxiFrontFill size={25} color="white" />
+              <BsFillTaxiFrontFill className="text-xl md:text-3xl" color="white" />
               <span className="text-white text-sm ml-3">Airport taxis</span>
             </div>
           </div>
           {type !== "list" && (
             <div>
               <div className="text-white mt-10">
-                <h1 className="text-2xl font-bold mb-4">
+                <h1 className="text-lg font-semibold md:text-2xl md:font-bold mb-4">
                   A lifetime of discounts? It's Genius.
                 </h1>
-                <p className="mb-3">
+                <p className="text-sm md:text-md mb-3">
                   Get rewarded for your travels-unlock instant savings of 10% or
                   more with a free Lamabooking account
                 </p>
@@ -84,11 +84,11 @@ export const Header = ({ type }) => {
                 </button>
               </div>
 
-              <div className="flex justify-around items-center border-2 border-yellow-400 rounded-md py-2 px-3 w-full text-black bg-white absolute bottom-[-6.6rem]">
+              <div className="flex justify-around items-center border-2 border-yellow-400 rounded-md py-2 px-3 ml-[-0.5rem] w-full text-black bg-white absolute bottom-[-8rem] md:bottom-[-6.6rem]">
                 <div className="flex items-center gap-2">
                   <FaBed color="lightGray" />
                   <input
-                    className="outline-none"
+                    className="outline-none w-36 text-sm md:text-lg md:w-auto"
                     type="text"
                     placeholder="Where are you going?"
                     onChange={e=>setDestination(e.target.value)}
@@ -98,7 +98,7 @@ export const Header = ({ type }) => {
                   <BsFillCalendarDateFill color="lightGray" />
                   <span
                     onClick={() => setOpenDate(!openDate)}
-                    className="text-gray-400"
+                    className="text-gray-400 text-xs w-40 md:text-lg md:w-auto"
                   >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                     date[0].endDate,
                     "MM/dd/yyyy"
@@ -118,7 +118,7 @@ export const Header = ({ type }) => {
                   <BsFillPersonFill color="lightGray" />
                   <span
                     onClick={() => setOpenOptions(!openOptions)}
-                    className="text-gray-400"
+                    className="text-gray-400 text-xs md:text-lg"
                   >{`${options.adult} adult . ${options.children} children . ${options.room} room`}</span>
                   {openOptions && (
                     <div className="absolute z-[20] top-[50px] bg-white shadow-xl w-52 px-4 py-6  text-gray-400 rounded-md">
