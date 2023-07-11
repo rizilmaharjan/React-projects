@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
-import Button from "./Button";
-import Card from "./Card";
+import { useEffect, useState, useRef } from "react"
+import Button from "./Button"
+import Card from "./Card"
 
 const getLocalData = () => {
   const confessions = localStorage.getItem("myConfession");
